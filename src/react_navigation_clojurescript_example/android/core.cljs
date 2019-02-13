@@ -11,32 +11,39 @@
 (def view (r/adapt-react-class (.-View ReactNative)))
 (def image (r/adapt-react-class (.-Image ReactNative)))
 (def touchable-highlight (r/adapt-react-class (.-TouchableHighlight ReactNative)))
+(def button (r/adapt-react-class (.-Button ReactNative)))
 ;; navigation 
-(def create-tab-navigator (.-createBottomTabNavigator ReactNavigation))
+(def create-stack-navigator (.-createStackNavigator ReactNavigation))
 (def create-app-container (.-createAppContainer ReactNavigation))
 
 
-(defn home-screen []
+(defn home-screen [props]
+  (fn [props]
+    [view {:style {:flex 1 :justify-content "center" :align-tems "center"}}
+     [text "Home!"]
+     [button {:title "Go to details" 
+              :on-press (fn []
+                          ;; which is equal to props.navigation.navigate("Details")
+                          (.navigate (.-navigation (clj->js props)) "Details") 
+                         ) }]
+     ])
+  )
+
+(defn details-screen []
   [view {:style {:flex 1 :justify-content "center" :align-tems "center"}}
-   [text "Home!"]
+   [text "Details Screen!"]
    ]
   )
 
-(defn settings-screen []
-  [view {:style {:flex 1 :justify-content "center" :align-tems "center"}}
-   [text "Settings!"]
-   ]
-  )
-
-(def tab-navigator 
-  (create-tab-navigator
-   (clj->js {:Home {:screen (r/reactify-component home-screen)}
-             :Settings {:screen (r/reactify-component settings-screen)}
+(def stack-navigator 
+  (create-stack-navigator
+   (clj->js {:Home  (r/reactify-component home-screen)
+             :Details (r/reactify-component details-screen)
              })
-   (clj->js {:tabBarOptions {:style {:backgroundColor "#eee"}}})
+   (clj->js {:initialRouteName "Home"})
    ))
 
-(defn app-root [] [:> (create-app-container tab-navigator ) {}])
+(defn app-root [] [:> (create-app-container stack-navigator ) {}])
 
 (defn init []
       (dispatch-sync [:initialize-db])
