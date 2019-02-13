@@ -1,8 +1,13 @@
 # react-navigation-clojurescript-example
 
 Example to show how to use react-navigation3 https://reactnavigation.org/ in ClojureScript.
-React Navigation (https://reactnavigation.org/) have few code examples which are written in Java Script.
-This Example contains same code examples in ClojureScript that will help you get started with react-navigation.
+
+React Navigation (https://reactnavigation.org/) has few code examples which are written in Java Script.
+
+react-navigation-clojurescript-example contains ClojureScript examples same as JS examples and this will help you get started with react-navigation.
+
+* on master branch it contains example of tab navigator
+* on stack navigator branch it contains example of stack navigator
 
 This example uses re-natal.
 ## Setup 
