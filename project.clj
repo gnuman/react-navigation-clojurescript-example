@@ -18,7 +18,7 @@
                                     ["with-profile" "advanced" "cljsbuild" "once"]]}
             :jvm-opts ["-XX:+IgnoreUnrecognizedVMOptions" "--add-modules=java.xml.bind"]
             :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.14"]
-                                            [com.cemerick/piggieback "0.2.1"]]
+                                            [cider/piggieback "0.4.0"]]
                              :source-paths ["src" "env/dev"]
                              :cljsbuild    {:builds [
                                                      {:id           "ios"
@@ -38,7 +38,7 @@
                                                                      :optimizations :none
                                                                      :target :nodejs}}
 #_($DEV_PROFILES$)]}
-                             :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}
+                             :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
                        :prod {:cljsbuild {:builds [
                                                    {:id           "ios"
                                                     :source-paths ["src" "env/prod"]
